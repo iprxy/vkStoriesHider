@@ -1,7 +1,6 @@
 'use strict'
 const req = require('tiny_request')
-const config = require('./config')
-const token = config.token
+const token = require('./config').token
 const url = 'https://api.vk.com/method/'
 
 function newReq(type,url,method,query) {
@@ -37,7 +36,7 @@ let query = {
 newReq('get', url, 'friends.get', query)
     .then(response => {
         let data = JSON.parse(response)
-        if(data.response == undefined) {
+        if(!data.response) {
             console.log(response)
         } else {
             let friendsCount = data.response.length
@@ -59,7 +58,7 @@ newReq('get', url, 'friends.get', query)
                     }
                     newReq('post', url, 'execute.storiesAddBan', query)
                         .then(resp => {
-                            if(JSON.parse(resp).response == undefined) {
+                            if(!JSON.parse(resp).response) {
                                 console.log(response)
                             } else {
                                 if (i == friendlist.length-1) {
