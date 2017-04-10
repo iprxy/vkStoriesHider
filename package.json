@@ -1,0 +1,15 @@
+{
+  "name": "stories_hider",
+  "version": "1.0.0",
+  "description": "Hide all your friens from VK Stories list",
+  "main": "index.js",
+  "dependencies": {
+    "tiny_request": "^1.0.12"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "iprxy",
+  "license": "MIT"
+}
