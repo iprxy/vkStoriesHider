@@ -58,7 +58,7 @@ newReq('get', url, 'friends.get', query)
                         'access_token': token
                     }
                     newReq('post', url, 'execute.storiesAddBan', query)
-                        .then((resp)=>{
+                        .then(resp => {
                             if(JSON.parse(resp).response == undefined) {
                                 console.log(response)
                             } else {
