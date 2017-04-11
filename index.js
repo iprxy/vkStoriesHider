@@ -62,7 +62,7 @@ newReq('get', url, 'friends.get', query)
                                 console.log(response)
                             } else {
                                 if (i == friendlist.length-1) {
-                                    console.log(`Done! All off ${friendsCount} your friends were hided from your stories!`)
+                                    console.log(`Done! All off ${friendsCount} your friends were hidden from your stories!`)
                                 } else {
                                     console.log(`Hiding status: ${(100*i/friendlist.length).toFixed(0)}%`)
                                 }
