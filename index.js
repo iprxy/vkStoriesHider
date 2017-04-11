@@ -72,3 +72,42 @@ newReq('get', url, 'friends.get', query)
             }
         }
     })
+newReq('get', url, 'users.getSubscriptions', query)
+    .then(response => {
+        let data = JSON.parse(response)
+        if(!data.response.users.items) {
+            console.log(response)
+        } else {
+            let subscrCount = data.response.users.items.length
+            let subscrList = []
+            while (data.response.users.items.length > 0) {
+                subscrList.push(data.response.users.items.splice(0,200))
+            }
+            for(let i=0; i < subscrList.length; i++) {
+                hide(i)
+            }
+            function hide(i) {
+                setTimeout(() => {
+                    let query = {
+                        'v':'5.63',
+                        'lang':'ru',
+                        'https':1,
+                        'owners_ids':subscrList[i].toString(),
+                        'access_token': token
+                    }
+                    newReq('post', url, 'execute.storiesAddBan', query)
+                        .then(resp => {
+                            if(!JSON.parse(resp).response) {
+                                console.log(response)
+                            } else {
+                                if (i == subscrList.length-1) {
+                                    console.log(`Done! All off ${subscrCount} your subscriptions were hidden from your stories!`)
+                                } else {
+                                    console.log(`Hiding status: ${(100*i/subscrList.length).toFixed(0)}%`)
+                                }
+                            }
+                        })
+                }, 300 * i)
+            }
+        }
+    })
